@@ -2,8 +2,13 @@
   "name": "react-dev-helpers",
   "version": "0.0.1",
   "description": "A collection of helper components like showing the current viewport width that aid during React development.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Philip Mirau",
@@ -17,5 +22,9 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }
