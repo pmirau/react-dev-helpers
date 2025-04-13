@@ -4,6 +4,12 @@ import { useEffect, useState } from 'react'
 
 export type WindowWidthProps = object
 
+// TODO STOP
+// 1) untailwind this component
+// 2) test via npm link
+// 3) create git repo
+// 4) publish on npm
+
 /**
  * React component to display the current viewport width and breakpoint. This aids in responsive design debugging during development.
  */
