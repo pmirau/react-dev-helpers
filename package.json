@@ -1,0 +1,11 @@
+{
+  "name": "react-dev-helpers",
+  "version": "0.0.1",
+  "description": "A collection of helper components like showing the current viewport width that aid during React development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Philip Mirau",
+  "license": "ISC"
+}
