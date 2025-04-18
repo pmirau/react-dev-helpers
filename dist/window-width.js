@@ -1,11 +1,27 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
+const BASE_CLASSNAME = 'rdvwwBreakpoint';
+// TODO STOP
+// 3) create git repo
+// 4) publish on npm
 /**
  * React component to display the current viewport width and breakpoint. This aids in responsive design debugging during development.
+ *
+ * @param breakpoints - Array of breakpoint name and value pairs. Example:
+ * [
+ *   ['max-sm', '40rem'],
+ *   ['max-md', '48rem'],
+ *   ['max-lg', '64rem'],
+ *   ['max-xl', '80rem'],
+ *   ['max-2xl', '96rem'],
+ * ]
  */
-export default function WindowWidth({}) {
+export default function WindowWidth({ breakpoints }) {
     const [windowWidth, setWindowWidth] = useState(0);
+    useEffect(() => {
+        applyDynamicBreakpoints(breakpoints);
+    }, []);
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -16,5 +32,71 @@ export default function WindowWidth({}) {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-    return (_jsxs("div", { className: "fixed right-0 bottom-0 bg-white p-1 font-mono text-xs font-bold", children: [_jsxs("div", { className: "flex flex-row items-center gap-2", children: [_jsx("div", { children: windowWidth }), _jsxs("div", { className: "text-[.6rem] text-compl", children: [_jsx("div", { className: "hidden max-sm:block", children: "none" }), _jsx("div", { className: "hidden sm:max-md:block", children: "sm" }), _jsx("div", { className: "hidden md:max-lg:block", children: "md" }), _jsx("div", { className: "hidden lg:max-xl:block", children: "lg" }), _jsx("div", { className: "hidden xl:max-2xl:block", children: "xl" }), _jsx("div", { className: "hidden 2xl:max-3xl:block", children: "2xl" }), _jsx("div", { className: "hidden 3xl:block", children: "3xl" })] })] }), _jsxs("div", { className: "mt-0.5 flex flex-row justify-between", children: [_jsx("div", { className: "size-1 rounded-full bg-compl-300 max-sm:bg-compl" }), _jsx("div", { className: "size-1 rounded-full bg-compl-300 sm:max-md:bg-compl" }), _jsx("div", { className: "size-1 rounded-full bg-compl-300 md:max-lg:bg-compl" }), _jsx("div", { className: "size-1 rounded-full bg-compl-300 lg:max-xl:bg-compl" }), _jsx("div", { className: "size-1 rounded-full bg-compl-300 xl:max-2xl:bg-compl" }), _jsx("div", { className: "size-1 rounded-full bg-compl-300 2xl:max-3xl:bg-compl" }), _jsx("div", { className: "size-1 rounded-full bg-compl-300 3xl:bg-compl" })] })] }));
+    return (_jsxs("div", { style: {
+            position: 'fixed',
+            left: 0,
+            bottom: 0,
+            backgroundColor: 'white',
+            padding: '0.25rem',
+            fontFamily: 'monospace',
+            fontSize: '0.75rem',
+            fontWeight: 'bold',
+            color: 'black',
+        }, children: [_jsxs("div", { style: {
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                }, children: [_jsx("div", { children: windowWidth }), _jsx("div", { style: { fontSize: '0.6rem', color: 'compl' }, children: breakpoints.map(([name]) => (_jsx("div", { className: `${BASE_CLASSNAME}_name_${name}`, children: name }, name))) })] }), _jsx("div", { style: {
+                    marginTop: '0.125rem',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    gap: '0.2rem',
+                }, children: breakpoints.map(([name]) => (_jsx("div", { style: {
+                        width: '0.4rem',
+                        height: '0.4rem',
+                        borderRadius: '50%',
+                        backgroundColor: '#d3d3d3',
+                        position: 'relative',
+                    }, children: _jsx("div", { className: `${BASE_CLASSNAME}_name_${name}`, style: {
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '50%',
+                            backgroundColor: 'black',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                        } }) }, name))) })] }));
+}
+function applyDynamicBreakpoints(breakpoints) {
+    const style = document.createElement('style');
+    let styles = '';
+    breakpoints.forEach(([name, value], index) => {
+        styles += `.${BASE_CLASSNAME}_name_${name} {
+      display: none;
+    }`;
+        const nextBreakpoint = breakpoints[index + 1];
+        if (nextBreakpoint) {
+            const [, nextValue] = nextBreakpoint;
+            styles += `
+        @media (min-width: ${value}) and (max-width: ${nextValue}) {
+          .${BASE_CLASSNAME}_name_${name} {
+            display: block;
+          }
+        }
+      `;
+        }
+        else {
+            styles += `
+      @media (min-width: ${value}) {
+        .${BASE_CLASSNAME}_name_${name} {
+          display: block;
+        }
+      }
+    `;
+        }
+    });
+    style.appendChild(document.createTextNode(styles));
+    document.head.appendChild(style);
 }
