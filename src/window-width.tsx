@@ -7,7 +7,7 @@ export type WindowWidthProps = {
   breakpoints: [string, string][]
 }
 
-const BASE_CLASSNAME = 'rdvwwBreakpoint'
+const BASE_CLASSNAME = 'rdhwwBreakpoint'
 
 // TODO STOP
 // 3) create git repo
