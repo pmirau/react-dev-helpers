@@ -9,10 +9,6 @@ export type WindowWidthProps = {
 
 const BASE_CLASSNAME = 'rdhwwBreakpoint'
 
-// TODO STOP
-// 3) create git repo
-// 4) publish on npm
-
 /**
  * React component to display the current viewport width and breakpoint. This aids in responsive design debugging during development.
  *
