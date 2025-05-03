@@ -1,10 +1,7 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-const BASE_CLASSNAME = 'rdvwwBreakpoint';
-// TODO STOP
-// 3) create git repo
-// 4) publish on npm
+const BASE_CLASSNAME = 'rdhwwBreakpoint';
 /**
  * React component to display the current viewport width and breakpoint. This aids in responsive design debugging during development.
  *
