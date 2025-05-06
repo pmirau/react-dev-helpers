@@ -35,7 +35,9 @@ import { WindowWidth } from 'react-dev-helpers';
 ## DevOnly
 
 
-This component renders its children only during development mode. `process.env.NODE_ENV` is ignored, when isDev is defined.
+This component renders its children only during development mode. 
+
+It will automatically check `process.env.NODE_ENV` if it is in development mode. 
 
 ```jsx
 import { DevOnly } from 'react-dev-helpers';
@@ -54,3 +56,8 @@ import { DevOnly } from 'react-dev-helpers';
 
 // ...
 ```
+
+**Props**
+
+- `isDev: boolean` (optional): Control if in development mode manually. `process.env.NODE_ENV` is ignored if isDev is defined.
+- `nodeEnvDevString: string` (optional): The value that defines if process.env.NODE_ENV is in dev mode. Only used if isDev is not defined. Defaults to `development`
