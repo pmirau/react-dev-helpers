@@ -2,6 +2,10 @@
 
 A collection of debug helpers or utilities for React development.
 
+## Installation
+
+1. `npm i -D react-dev-helpers`
+
 ## Window Width
 
 The WindowWidth component shows the current viewport width and active breakpoint in a small overlay at the bottom of the screen.
@@ -25,3 +29,5 @@ import { WindowWidth } from 'react-dev-helpers';
   ]}
 />
 ```
+
+<img src="docs/window-width-example.webp" alt="drawing" height="350"/>
